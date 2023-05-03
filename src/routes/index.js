@@ -3,7 +3,9 @@ const router = Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../controllers/auth')
 const kvester = require('../controllers/kvester');
+const chat = require('../controllers/chat');
 const tests = require('../controllers/test');
+const comment = require('../controllers/comment');
 const thames = require('../controllers/thame');
 
 
@@ -22,14 +24,19 @@ router.post('/auth/singup', [
 // kvester
 router.get('/kvester/get/all', kvester.getAll);
 router.post('/kvester/add', kvester.add);
+
 // kvester thame
 router.post('/thame/get/all', thames.getAllByKvesterId);
 router.post('/thame/get/byid', thames.getById);
 router.post('/thame/add', thames.add)
 
-
 // content
+router.post('/comment/get/all', comment.get);
+router.post('/comment/add', comment.add);
 
+// chat
+router.get('/chat/get/all', chat.get);
+router.post('/chat/add', chat.add);
 
 // test
 router.get('/test/get/:byId', );

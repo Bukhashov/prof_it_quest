@@ -15,7 +15,7 @@ const MainNavigator = () => {
                 <Stack.Screen name="main" component={TabNavigator} options={{ headerShown: false }} />
                 <Stack.Screen name="singin" component={SingInScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="singup" component={SingUpScreen} options={{ headerShown: false }} />
-            </Stack.Navigator> 
+            </Stack.Navigator>
         </NavigationContainer>
     )
 }

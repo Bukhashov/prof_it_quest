@@ -3,8 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import AccSreen from '../screen/accScreen';
-import MainScreen from '../screen/mainScreen';
+import AccountScreen from '../screen/accountScreen';
+import ChatSreen from '../screen/chat/chatScreen';
+import HomeNavigator from '../navigator/homeNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,13 +48,23 @@ const TabNavigator = ({navigation}) => {
                     size={size} color={color} 
                     />
                 }
+                else if(route.name === "Chat") {
+                    return <Ionicons 
+                    name={ focused 
+                        ? 'ios-information-circle' 
+                        : 'ios-information-circle-outline' 
+                    } 
+                    size={size} color={color} 
+                    />
+                }
                 },
                 tabBarInactiveTintColor: 'black',
                 tabBarActiveTintColor: 'black',
             })}
         >
-            <Tab.Screen name="Home" component={MainScreen} />
-            <Tab.Screen name="Account" component={AccSreen} />
+            <Tab.Screen name="Home" component={HomeNavigator} />
+            <Tab.Screen name="Chat" component={ChatSreen} />
+            <Tab.Screen name="Account" component={AccountScreen} />
         </Tab.Navigator>
     )
 }
