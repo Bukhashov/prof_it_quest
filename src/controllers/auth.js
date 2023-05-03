@@ -73,7 +73,8 @@ class Auth {
             lastname: lastname,
             firstnaem: firstname,
             email: email,
-            password: hashPassword
+            password: hashPassword,
+            ball: 200
         }).save();
 
         res.status(201).json({
