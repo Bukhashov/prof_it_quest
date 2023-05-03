@@ -2,8 +2,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNavigator from './TabNavigator';
-import SingInScreen from '../screen/singinScreen';
-import SingUpScreen from '../screen/singupScreen';
+import SingInScreen from '../screen/auth/singinScreen';
+import SingUpScreen from '../screen/auth/singupScreen';
 
 const Stack = createNativeStackNavigator();
 
