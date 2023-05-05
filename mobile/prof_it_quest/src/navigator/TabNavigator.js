@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AccountScreen from '../screen/accountScreen';
 import ChatSreen from '../screen/chat/chatScreen';
 import HomeNavigator from '../navigator/homeNavigator';
+import PopularNavigator from './popularNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -48,6 +49,15 @@ const TabNavigator = ({navigation}) => {
                     size={size} color={color} 
                     />
                 }
+                else if(route.name === "Popular") {
+                    return <Ionicons 
+                    name={ focused 
+                        ? 'star' 
+                        : 'star-outline' 
+                    } 
+                    size={size} color={color} 
+                    />
+                }
                 else if(route.name === "Chat") {
                     return <Ionicons 
                     name={ focused 
@@ -63,6 +73,7 @@ const TabNavigator = ({navigation}) => {
             })}
         >
             <Tab.Screen name="Home" component={HomeNavigator} />
+            <Tab.Screen name="Popular" component={PopularNavigator} options={{ headerShown: false }} />
             <Tab.Screen name="Chat" component={ChatSreen} />
             <Tab.Screen name="Account" component={AccountScreen} />
         </Tab.Navigator>

@@ -14,10 +14,8 @@ class Chat {
 
     get = async (req, res) => {
         const allChats = await chatModel.find({});
-
-        if(allChats.length() > 0) {
-            res.status(200).json(allChats);
-        }
+        res.status(200).json(allChats);
+        
     }
 }
 
