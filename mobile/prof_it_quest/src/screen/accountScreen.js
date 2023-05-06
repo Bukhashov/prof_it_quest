@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, SafeAreaView, ScrollView} from "react-native";
+import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Avatar } from '@rneui/themed';
 
@@ -32,13 +33,15 @@ const AccountScreen = ({navigation}) => {
     }
 
     const onPressLogout = async () => {
-        AsyncStorage.clear();
-        navigation.navigate("main");
+        await AsyncStorage.clear();
+        navigation.navigate("Home");
     }
 
-    useEffect(()=> {
-        getUserData()
-    }, []);
+    useFocusEffect(
+        React.useCallback(()=> {
+            getUserData()
+        }, [])
+    );
 
     return (
         <SafeAreaView>

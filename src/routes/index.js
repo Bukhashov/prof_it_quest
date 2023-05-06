@@ -8,6 +8,8 @@ const tests = require('../controllers/test');
 const comment = require('../controllers/comment');
 const thames = require('../controllers/thame');
 
+const programmer = require('../controllers/populer/programmer');
+const university = require('../controllers/populer/university');
 
 // auth
 router.post('/auth/singin', [
@@ -34,6 +36,12 @@ router.post('/thame/add', thames.add)
 router.post('/comment/get/all', comment.get);
 router.post('/comment/add', comment.add);
 
+// popular
+router.get('/popular/programmer/get/all', programmer.getAll);
+router.get('/popular/programmer/get/:id', programmer.getById);
+router.get('/popular/university/get/all', university.getAll);
+router.get('/popular/university/get/:id', university.getById);
+
 // chat
 router.get('/chat/get/all', chat.get);
 router.post('/chat/add', chat.add);
@@ -41,7 +49,6 @@ router.post('/chat/add', chat.add);
 // test
 router.get('/test/get/:byId', );
 router.get('/test/control/', );
-
 
 module.exports = router;
 

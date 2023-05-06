@@ -10,6 +10,7 @@ const { width, height } = Dimensions.get("window");
 
 const ChatScreen = () => {
     const [messages, setMessage] = React.useState([]);
+    const [downloadMassage, setDownloadMassage] = React.useState(false);
     const [newMessage, setNewMessage] = React.useState("");
 
     const sendMessage = () => {
@@ -19,7 +20,9 @@ const ChatScreen = () => {
     const getMessages = async () => {
         try{
             await axios.get(`${config.API_URI}${config.API_VERSION}/chat/get/all`).then((response) => {
-                console.log(response.data);
+                if (response.data.length > 0) {
+                    setDownloadMassage(true);
+                };
                 setMessage(response.data);
             })
         }catch(e){
@@ -38,30 +41,43 @@ const ChatScreen = () => {
     )
 
     return(
-        <View>
-            <SafeAreaView>
+        <View >
+            <SafeAreaView style={{position: 'relative'}}>
                 <ScrollView bounces={false} horizontal={false} showsHorizontalScrollIndicator={false}>
-                    
+                    {
+                        downloadMassage ? (
+                            <View><Text>yes mgs</Text>
+                                <Text>yes mgs</Text>
+                            </View>
+                        )
+                        :(
+                           <View>
+                                <Text>no mgs</Text>
+                           </View>
+                        )
+                    }
                 </ScrollView>
+                <View style={{ 
+                    position: 'absolute',
+                    width: width,
+                    height: 80, 
+                    bottom: -(height-110),
+                    paddingLeft: 5, paddingHorizontal: 5, 
+                    display: 'flex', flexDirection: 'row' 
+                }}>
+                    <View style={{ width: width-130}}>
+                        <Input 
+                            placeholder="New Massage"
+                            value={newMessage}
+                            onChangeText={(pass) => onChangeNewMessage(pass)} 
+                        />
+                    </View>
+                    <View style={{width: 120, borderRadius: 16}}>
+                        <Button onPress={() => { auth()}} title="Zhyberu" color="black" />
+                    </View>
+                </View>
             </SafeAreaView>
-            <View style={{ 
-                position: 'absolute',
-                width: width, 
-                bottom: -(height-90),
-                paddingLeft: 5, paddingHorizontal: 5, 
-                display: 'flex', flexDirection: 'row' 
-            }}>
-                <View style={{ width: width-130}}>
-                    <Input 
-                        placeholder="New Massage"
-                        value={newMessage}
-                        onChangeText={(pass) => onChangeNewMessage(pass)} 
-                    />
-                </View>
-                <View style={{width: 120, borderRadius: 16}}>
-                    <Button onPress={() => { auth()}} title="Zhyberu" color="black" />
-                </View>
-            </View>
+            
         </View>
     )
 }
