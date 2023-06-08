@@ -28,7 +28,7 @@ router.get('/kvester/get/all', kvester.getAll);
 router.post('/kvester/add', kvester.add);
 
 // kvester thame
-router.post('/thame/get/all', thames.getAllByKvesterId);
+router.get('/thame/:language/all', thames.getAllByLanguage)
 router.post('/thame/get/byid', thames.getById);
 router.post('/thame/add', thames.add)
 
@@ -46,7 +46,7 @@ router.get('/popular/university/get/:id', university.getById);
 router.get('/chat/get/all', chat.get);
 router.post('/chat/add', chat.add);
 
-router.get('/thame/:language/all', thames.getAllByLanguage)
+
 router.get('/info/:id/', thames.getAllByLanguage)
 
 // test

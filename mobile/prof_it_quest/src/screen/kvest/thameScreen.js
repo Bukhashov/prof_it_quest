@@ -8,6 +8,7 @@ const ThameScreen = (props) => {
     const [data, setData] = React.useState([]);
     const featData = async () => {
         try{
+            console.log(`${config.API_URI}${config.API_VERSION}/thame/${props.route.params.content.language}/all`)
             await axios.get(`${config.API_URI}${config.API_VERSION}/thame/${props.route.params.content.language}/all`).then(res => {
                 setData(res.data);
             })
