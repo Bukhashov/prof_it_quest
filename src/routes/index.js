@@ -46,6 +46,9 @@ router.get('/popular/university/get/:id', university.getById);
 router.get('/chat/get/all', chat.get);
 router.post('/chat/add', chat.add);
 
+router.get('/thame/:language/all', thames.getAllByLanguage)
+router.get('/info/:id/', )
+
 // test
 router.get('/test/get/:byId', );
 router.get('/test/control/', );

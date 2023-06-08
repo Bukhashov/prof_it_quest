@@ -10,20 +10,13 @@ class Thame {
             subject: subject
         }).save();
 
-        res.status(200).json("saved");
+        res.status(201).json("saved");
     }
 
-    getAllByKvesterId = async (req, res) => {
-        const { kvesterId } = req.body;
-
-        const thames = await thameModel.find({kvesterId: kvesterId}, {title: 1, _id: 1, ball: 1});
-
-        if(thames.length > 0){
-            res.status(200).json(thames);
-        }
-        else{
-            res.status(400);
-        }
+    getAllByLanguage = async (req, res) => {
+        const { language } = req.params;
+        const thames = await thameModel.find({language: language}, {title: 1, _id: 1, subject: 1});
+        res.status(200).json(thames);
     }
 
     getById = async (req, res) => {

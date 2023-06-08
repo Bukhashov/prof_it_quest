@@ -67,8 +67,7 @@ class Auth {
         }
         
         const hashPassword = await Hash(password, 8)
-        
-        console.log(hashPassword);
+
         const newUser = new userModel({
             lastname: lastname,
             firstnaem: firstname,
