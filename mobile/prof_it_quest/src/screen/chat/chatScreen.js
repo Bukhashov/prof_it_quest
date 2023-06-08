@@ -13,17 +13,25 @@ const ChatScreen = () => {
     const [downloadMassage, setDownloadMassage] = React.useState(false);
     const [newMessage, setNewMessage] = React.useState("");
 
-    const sendMessage = () => {
-
+    const sendMessage = async () => {
+        try{
+            await axios.post(`${config.API_URI}/chat/add`, {
+                uid: "22",
+                massage: newMassage,
+            })
+            setNewMassage("");
+            getAllMassages();
+        }
+        catch(e){
+            console.log(e)
+        }
     }
 
     const getMessages = async () => {
         try{
             await axios.get(`${config.API_URI}${config.API_VERSION}/chat/get/all`).then((response) => {
-                if (response.data.length > 0) {
-                    setDownloadMassage(true);
-                };
                 setMessage(response.data);
+                console.log(response.data);
             })
         }catch(e){
             console.log(e);
@@ -42,41 +50,58 @@ const ChatScreen = () => {
 
     return(
         <View >
-            <SafeAreaView style={{position: 'relative'}}>
-                <ScrollView bounces={false} horizontal={false} showsHorizontalScrollIndicator={false}>
+            <SafeAreaView style={{position: 'relative', height: ((height/100)*84)}}>
+                <ScrollView style={{position: 'relative'}} bounces={false} horizontal={false} showsHorizontalScrollIndicator={false}>
                     {
-                        downloadMassage ? (
-                            <View><Text>yes mgs</Text>
-                                <Text>yes mgs</Text>
-                            </View>
-                        )
-                        :(
-                           <View>
-                                <Text>no mgs</Text>
-                           </View>
-                        )
+                      <View
+                        style={{
+                            paddingHorizontal: 15,
+                        }}
+                      >
+                        {
+                            messages.map(( message) => (
+                                <View key={message._id}
+                                    style={{
+                                        display: 'flex',
+                                        paddingVertical: 8,
+                                        paddingHorizontal: 10,
+                                        marginVertical: 10,
+                                        borderRadius: 12,
+                                        backgroundColor: "#E5E7E9",
+                                    }}
+                                    >
+                                    <View style={{paddingHorizontal: 5, paddingVertical: 3, }}><Text style={{  color: "#99A3A4" }}>{message.username}</Text></View>
+                                    <View><Text style={{ color: "#2C3E50" }}>{message.message}</Text></View>
+                                </View>
+                            ))
+                        }
+                        <View style={{width: width, height: 100}} />
+
+                      </View>
                     }
                 </ScrollView>
-                <View style={{ 
-                    position: 'absolute',
-                    width: width,
-                    height: 80, 
-                    bottom: -(height-110),
-                    paddingLeft: 5, paddingHorizontal: 5, 
-                    display: 'flex', flexDirection: 'row' 
-                }}>
+            </SafeAreaView>
+            <View style={{ 
+                position: 'absolute',
+                width: width,
+                height: 80, 
+                bottom: 0,
+                paddingLeft: 5, paddingHorizontal: 5, 
+                backgroundColor: "#fff",
+                display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
+            >
                     <View style={{ width: width-130}}>
                         <Input 
                             placeholder="New Massage"
                             value={newMessage}
+                            style={{color: "#B7C0D3"}}
                             onChangeText={(pass) => onChangeNewMessage(pass)} 
                         />
                     </View>
                     <View style={{width: 120, borderRadius: 16}}>
-                        <Button onPress={() => { auth()}} title="Zhyberu" color="black" />
+                        <Text onPress={() => { auth()}} style={{ paddingHorizontal: 12, paddingVertical: 8, backgroundColor: "#B7C0D3", textAlign: 'center', borderRadius: 8, }}>Жіберу</Text>
                     </View>
-                </View>
-            </SafeAreaView>
+            </View>
             
         </View>
     )

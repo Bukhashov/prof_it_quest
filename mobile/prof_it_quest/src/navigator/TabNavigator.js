@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useFocusEffect } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import AccountScreen from '../screen/accountScreen';
+
+
 import ChatSreen from '../screen/chat/chatScreen';
 import HomeNavigator from '../navigator/homeNavigator';
 import PopularNavigator from './popularNavigator';
@@ -11,26 +10,12 @@ import PopularNavigator from './popularNavigator';
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = ({navigation}) => {
-    const [token, setToken] = useState(false);
-    
-    const authControl = async () => {
-        let t = await AsyncStorage.getItem("token");
-        if(!t) navigation.navigate("singin")
-        setToken(t); 
-    }
-
-    useFocusEffect(
-        React.useCallback(() => {
-            authControl();
-        }, [])
-    )
-    
     return (
         <Tab.Navigator
             screenOptions={({route}) => ({
                 headerShown: true,
                 tabBarIcon: ({ focused, color, size }) => {
-                if(route.name === "Home") {
+                if(route.name === "Басты бет") {
                     return <Ionicons 
                     name={ focused 
                         ? 'home' 
@@ -40,16 +25,8 @@ const TabNavigator = ({navigation}) => {
                     color={color} 
                     />
                 } 
-                else if(route.name === "Account") {
-                    return <Ionicons 
-                    name={ focused 
-                        ? 'person' 
-                        : 'person-outline' 
-                    } 
-                    size={size} color={color} 
-                    />
-                }
-                else if(route.name === "Popular") {
+               
+                else if(route.name === "Танымал") {
                     return <Ionicons 
                     name={ focused 
                         ? 'star' 
@@ -58,7 +35,7 @@ const TabNavigator = ({navigation}) => {
                     size={size} color={color} 
                     />
                 }
-                else if(route.name === "Chat") {
+                else if(route.name === "Чать") {
                     return <Ionicons 
                     name={ focused 
                         ? 'ios-information-circle' 
@@ -68,14 +45,32 @@ const TabNavigator = ({navigation}) => {
                     />
                 }
                 },
-                tabBarInactiveTintColor: 'black',
-                tabBarActiveTintColor: 'black',
+                tabBarInactiveTintColor: '#fff',
+                tabBarActiveTintColor: '#fff',
+                tabBarStyle: {
+                    backgroundColor:'#A5BDE9',
+                    height: 80,
+                    // borderRadius: 15,
+                    borderTopLeftRadius: 22,
+                    borderTopRightRadius: 22,
+                },
+                tabBarItemStyle: {
+                    margin: 15,    
+                },
+                headerStyle: {
+                    backgroundColor:'#fff',
+                    // borderBottomColor: "#fff",
+                    // borderWidth: 1,
+                },
+                headerTitleStyle: {
+                    color: '#000',
+
+                },
             })}
         >
-            <Tab.Screen name="Home" component={HomeNavigator} />
-            <Tab.Screen name="Popular" component={PopularNavigator} options={{ headerShown: false }} />
-            <Tab.Screen name="Chat" component={ChatSreen} />
-            <Tab.Screen name="Account" component={AccountScreen} />
+            <Tab.Screen name="Басты бет" component={HomeNavigator} />
+            <Tab.Screen name="Танымал" component={PopularNavigator} options={{ headerShown: false }} />
+            <Tab.Screen name="Чать" component={ChatSreen} />
         </Tab.Navigator>
     )
 }
