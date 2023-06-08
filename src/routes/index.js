@@ -47,11 +47,11 @@ router.get('/chat/get/all', chat.get);
 router.post('/chat/add', chat.add);
 
 router.get('/thame/:language/all', thames.getAllByLanguage)
-router.get('/info/:id/', )
+router.get('/info/:id/', thames.getAllByLanguage)
 
 // test
-router.get('/test/get/:byId', );
-router.get('/test/control/', );
+router.get('/test/get/:byId', thames.getAllByLanguage);
+router.get('/test/control/', thames.getAllByLanguage);
 
 module.exports = router;
 

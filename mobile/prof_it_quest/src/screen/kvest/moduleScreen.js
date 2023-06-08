@@ -38,7 +38,9 @@ const ModuleScreen = ({navigation}) => {
                         <TouchableOpacity 
                             key={kvest._id}
                             onPress={() => navigation.navigate('thames', {
-                                content: kvest._id
+                                content: {
+                                    language: kvest.title
+                                }
                             })}
                             style={{
                                 backgroundColor: "#E5E7E9",
