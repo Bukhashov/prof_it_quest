@@ -29,7 +29,7 @@ router.post('/kvester/add', kvester.add);
 
 // kvester thame
 router.get('/thame/:language/all', thames.getAllByLanguage)
-router.post('/thame/get/byid', thames.getById);
+router.get('/thame/:id/byid', thames.getById);
 router.post('/thame/add', thames.add)
 
 // content

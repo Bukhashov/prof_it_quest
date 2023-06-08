@@ -20,15 +20,10 @@ class Thame {
     }
 
     getById = async (req, res) => {
-        const {thameId} = req.body;
+        const {id} = req.params;
 
-        const th = await thameModel.findById(thameId);
-
-        if(th) {
-            res.status(200).json(th);
-        }else{
-            res.status(400);
-        }
+        const th = await thameModel.findById(id);
+        res.status(200).json(th);
     }
 }
 
