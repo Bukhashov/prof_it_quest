@@ -1,9 +1,10 @@
 import React from "react";
-import { View, Text, Dimensions, ScrollView, SafeAreaView} from "react-native";
+import { View, Text, Dimensions, ScrollView, SafeAreaView, TextInput} from "react-native";
 import { Input, Button } from '@rneui/themed';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useFocusEffect } from '@react-navigation/native';
+import { Dialog } from '@rneui/themed';
 import axios from "axios";
-
 import config from '../../../config/config';
 
 const { width, height } = Dimensions.get("window");
@@ -12,19 +13,27 @@ const ChatScreen = () => {
     const [messages, setMessage] = React.useState([]);
     const [downloadMassage, setDownloadMassage] = React.useState(false);
     const [newMessage, setNewMessage] = React.useState("");
+    const [visible, setVisible] =  React.useState(false);
+    const [userFullname, setUserFullName] = React.useState("")
 
     const sendMessage = async () => {
+        console.log("sendMessage")
         try{
-            await axios.post(`${config.API_URI}/chat/add`, {
-                uid: "22",
-                massage: newMassage,
+            await axios.post(`${config.API_URI}${config.API_VERSION}/chat/add`, {
+                username: userFullname,
+                message: newMessage,
             })
-            setNewMassage("");
-            getAllMassages();
+            setNewMessage("");
         }
         catch(e){
             console.log(e)
         }
+    }
+
+    const controlName = () => {
+        AsyncStorage.getItem('fullname')
+        .then(name => setUserFullName(name))
+        .catch(() => setVisible(true))
     }
 
     const getMessages = async () => {
@@ -45,8 +54,18 @@ const ChatScreen = () => {
     useFocusEffect(
         React.useCallback(()=> {
             getMessages();
+            controlName();
         }, [])
     )
+
+    const toggleDialog = () => {
+        setVisible(!visible);
+    }
+
+    const entryFullName = () => {
+        AsyncStorage.setItem('fullname', userFullname);
+        setVisible(!visible)
+    }
 
     return(
         <View >
@@ -81,6 +100,43 @@ const ChatScreen = () => {
                     }
                 </ScrollView>
             </SafeAreaView>
+            <Dialog
+                isVisible={visible}
+                onBackdropPress={toggleDialog}
+            >
+                <Dialog.Title title="Есіміңіз"/>
+                <Text>Чатта хабарламалар алмасу үшін толық АТЫ ЖӨНІҢІЗДІ енгізініз</Text>
+                <TextInput 
+                    placeholder="Аты Жөні"
+                    onChangeText={(vel) => setUserFullName(vel)}
+                    value={userFullname}
+                    style={{
+                        borderColor: "#000",
+                        borderWidth: 1,
+                        borderRadius: 8,
+                        padding: 3,
+                        marginVertical: 8,
+                    }}
+                /> 
+                <View
+                    style={{
+                        
+                    }}
+                >
+                    <Text 
+                        style={{
+                            fontSize: 18,
+                            fontWeight: '600',
+                            textAlign: 'center',
+                            padding: 5,
+                            color: "#B7C0D3" 
+                        }}
+                        onPress={() => entryFullName()}
+                        >Енгізу</Text>
+                </View>
+                
+            </Dialog>
+
             <View style={{ 
                 position: 'absolute',
                 width: width,
@@ -99,7 +155,7 @@ const ChatScreen = () => {
                         />
                     </View>
                     <View style={{width: 120, borderRadius: 16}}>
-                        <Text onPress={() => { auth()}} style={{ paddingHorizontal: 12, paddingVertical: 8, backgroundColor: "#B7C0D3", textAlign: 'center', borderRadius: 8, }}>Жіберу</Text>
+                        <Text onPress={() => { sendMessage() }} style={{ paddingHorizontal: 12, paddingVertical: 8, backgroundColor: "#B7C0D3", textAlign: 'center', borderRadius: 8, }}>Жіберу</Text>
                     </View>
             </View>
             

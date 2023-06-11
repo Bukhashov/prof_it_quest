@@ -48,12 +48,13 @@ const ModuleScreen = ({navigation}) => {
                                 paddingVertical: 10,
                                 marginVertical: 15,
                                 borderRadius: 12,
+                                display: 'flex', flexDirection: 'column', justifyContent: 'center',
                             }} 
                         >
                             <Image style={{ borderRadius: 8, width: 130, height: 120}} source={{uri: kvest.img }} />
-                            <View style={{marginLeft: 15, }}>
-                                        <Text style={{fontSize: 25,}}>{kvest.title}</Text>
-                                    </View>
+                            <View style={{marginLeft: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                                        <Text style={{fontSize: 20, color: "#2C3E50", }}>{kvest.title}</Text>
+                            </View>
                         </TouchableOpacity>
                     ))
                 }

@@ -47,7 +47,7 @@ const ProgrammeresScreen = ({navigation}) => {
                                         marginHorizontal: 15,
                                         marginVertical: 8,
                                         borderRadius: 12,
-                                        backgroundColor: "#B7C0D3",
+                                        backgroundColor: "#E5E7E9",
                                         display: 'flex',
                                         flexDirection: 'row',
                                         justifyContent: 'flex-start',
@@ -75,7 +75,7 @@ const ProgrammeresScreen = ({navigation}) => {
                                         />
                                     </View>
                                     <View style={{flex: 1, flexWrap: 'wrap', display: 'flex', flexDirection: 'row',  paddingVertical: 25}}>
-                                        <Text style={{ color: "#fff", fontSize: 18 }}>{d.fullname}</Text>
+                                        <Text style={{ color: "#2C3E50", fontSize: 18 }}>{d.fullname}</Text>
                                     </View>
                                 </TouchableOpacity>
                             ))

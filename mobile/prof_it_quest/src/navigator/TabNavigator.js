@@ -35,7 +35,7 @@ const TabNavigator = ({navigation}) => {
                     size={size} color={color} 
                     />
                 }
-                else if(route.name === "Чать") {
+                else if(route.name === "Чат") {
                     return <Ionicons 
                     name={ focused 
                         ? 'ios-information-circle' 
@@ -70,7 +70,7 @@ const TabNavigator = ({navigation}) => {
         >
             <Tab.Screen name="Басты бет" component={HomeNavigator} />
             <Tab.Screen name="Танымал" component={PopularNavigator} options={{ headerShown: false }} />
-            <Tab.Screen name="Чать" component={ChatSreen} />
+            <Tab.Screen name="Чат" component={ChatSreen} />
         </Tab.Navigator>
     )
 }

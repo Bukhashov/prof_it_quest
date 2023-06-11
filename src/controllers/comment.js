@@ -1,24 +1,22 @@
-const commentModel = require('../models/comment');
+const comentModel = require('../models/comment');
 
 class Comment {
-    add = async (req, res) => {
-        const { username, thameId, message } = req.body;
-
-        const newComment = new commentModel({
-            username: username,
+    
+    getById = async (req, res) => {
+        const {thameId} = req.params;
+        const comments = await comentModel.find({ thameId: thameId });
+        res.status(200).json(comments);
+    }
+    add = (req, res) => {
+        const { thameId, username, message } = req.body;
+        
+        new comentModel({
             thameId: thameId,
-            message: message
+            username: username,
+            message: message,
         }).save();
 
-        res.status(200).json({massage: "saved"});
-    }
-
-    get = async (req, res) => {
-        const {thameId} = req.body;
-
-        const comments = await commentModel.find({thameId: thameId});
-        
-        res.status(200).json(comments);
+        res.status(201).json({ massage: "crated" });
     }
 }
 

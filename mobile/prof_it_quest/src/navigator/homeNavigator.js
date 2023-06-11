@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import ModuleScreen from '../screen/kvest/moduleScreen';
 import ThameScreen from '../screen/kvest/thameScreen';
+import InfoScreen from '../screen/kvest/infoScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,8 +13,7 @@ const HomeNavigator = () => {
         <Stack.Navigator initialRouteName="kvests">
             <Stack.Screen name="kvests" component={ModuleScreen} options={{ headerShown: false }} />
             <Stack.Screen name="thames" component={ThameScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="info" component={ThameScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="test" component={ThameScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="info" component={InfoScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }

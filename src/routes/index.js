@@ -7,6 +7,7 @@ const chat = require('../controllers/chat');
 const tests = require('../controllers/test');
 const comment = require('../controllers/comment');
 const thames = require('../controllers/thame');
+const coment = require('../controllers/comment');
 
 const programmer = require('../controllers/populer/programmer');
 const university = require('../controllers/populer/university');
@@ -46,11 +47,14 @@ router.get('/popular/university/get/:id', university.getById);
 router.get('/chat/get/all', chat.get);
 router.post('/chat/add', chat.add);
 
-
 router.get('/info/:id/', thames.getAllByLanguage)
 
+// comentari
+router.get('/comment/get/:thameId/all', chat.get);
+router.post('/comment/add', chat.add);
+
 // test
-router.get('/test/get/:byId', thames.getAllByLanguage);
+router.get('/test/:thame', tests.getAllByThame);
 router.get('/test/control/', thames.getAllByLanguage);
 
 module.exports = router;
