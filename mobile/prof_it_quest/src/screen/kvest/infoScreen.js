@@ -26,7 +26,7 @@ const InfoScreen = (props) => {
 
     const featComments = async () => {
         try{
-            await axios.get(`${config.API_URI}${config.API_VERSION}`)
+            await axios.get(`${config.API_URI}${config.API_VERSION}/`)
         }catch(e){
 
         }
